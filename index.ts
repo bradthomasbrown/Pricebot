@@ -21,7 +21,7 @@ http('tnglpricebot', async (req, res) => {
         files.forEach(file => bot.deleteMessage(message.chat.id, file.name).catch(() => {}))
         bucket.deleteFiles({ force: true }).catch(() => {})
         message = await bot.sendMessage(
-            message.chat.id, `\`\`\`\n${tanglePrices}\n\`\`\``, 
+            message.chat.id, `\`\`\`\n(TNGL/$)\n${tanglePrices}\n\`\`\``, 
             { parse_mode: "MarkdownV2" }
         ).catch(handleCatch)
         bucket.file(message['message_id']).createWriteStream().end()
