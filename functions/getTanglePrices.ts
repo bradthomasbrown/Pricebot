@@ -7,7 +7,7 @@ export async function getTanglePrices() {
     let res = await superagent.post('https://rpc.ankr.com/multichain').send(reqs).catch(handleCatch)
     return res['body'].map(
         (res: { result: { blockchain: string; usdPrice: string } }) => 
-            `${translate(res.result.blockchain)}\t${parseInt((1 / parseFloat(res.result.usdPrice)).toString()).toLocaleString()}`)
+            `${translate(res.result.blockchain)}\t$${res.result.usdPrice.substring(0, 11)}`)
     .join('\n')
     .replace(/\./g, '\\.')
 }
